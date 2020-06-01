@@ -40,11 +40,11 @@ class UserScreen extends React.Component {
             <TouchableOpacity style={styles.avatar}>
             </TouchableOpacity>
             <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 8 }}>
-              <Text style={styles.userName}>{this.state.data.fullname}</Text>
+              <Text style={styles.userName}>{this.state.data.HoVaTen}</Text>
             </View>
             <View style={{ flexDirection: 'row', borderBottomWidth: 0.25, height: 40, alignItems: 'center' }}>
               <Text style={{ fontSize: 16, marginLeft: 5, fontWeight: 'bold' }}>Họ tên</Text>
-              <Text style={{ fontSize: 18, marginLeft: 38 }}>{this.state.data.fullname}</Text>
+              <Text style={{ fontSize: 18, marginLeft: 38 }}>{this.state.data.HoVaTen}</Text>
             </View>
 
             <View style={{ flexDirection: 'row', borderBottomWidth: 0.25, height: 40, alignItems: 'center' }}>
@@ -54,22 +54,22 @@ class UserScreen extends React.Component {
 
             <View style={{ flexDirection: 'row', borderBottomWidth: 0.25, height: 40, alignItems: 'center' }}>
               <Text style={{ fontSize: 16, marginLeft: 5, fontWeight: 'bold' }}>Email</Text>
-              <Text style={{ fontSize: 16, marginLeft: 46 }}>leducthang98@gmail.com</Text>
+              <Text style={{ fontSize: 16, marginLeft: 46 }}>{this.state.data.email}</Text>
             </View>
 
             <View style={{ flexDirection: 'row', borderBottomWidth: 0.25, height: 40, alignItems: 'center' }}>
               <Text style={{ fontSize: 16, marginLeft: 5, fontWeight: 'bold' }}>Điện thoại</Text>
-              <Text style={{ fontSize: 16, marginLeft: 13 }}>0394827798</Text>
+              <Text style={{ fontSize: 16, marginLeft: 13 }}>{this.state.data.DienThoai}</Text>
             </View>
 
             <View style={{ flexDirection: 'row', borderBottomWidth: 0.25, height: 40, alignItems: 'center' }}>
               <Text style={{ fontSize: 16, marginLeft: 5, fontWeight: 'bold' }}>Địa chỉ</Text>
-              <Text style={{ fontSize: 16, marginLeft: 37 }}>Hà Nội</Text>
+              <Text style={{ fontSize: 16, marginLeft: 37 }}>{this.state.data.DiaChi}</Text>
             </View>
 
             <View style={{ flexDirection: 'row', borderBottomWidth: 0.25, height: 40, alignItems: 'center' }}>
               <Text style={{ fontSize: 16, marginLeft: 5, fontWeight: 'bold' }}>Tỉnh thành</Text>
-              <Text style={{ fontSize: 16, marginLeft: 10 }}>Hà Nội</Text>
+              <Text style={{ fontSize: 16, marginLeft: 10 }}>{this.state.data.TinhThanh}</Text>
             </View>
 
           </View>

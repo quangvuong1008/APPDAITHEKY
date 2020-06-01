@@ -3,10 +3,12 @@ import getRentData from '../fetchAPIs/getRentDataAPI'
 function* rentSagaFunction(action) {
     try {
       
-        let rentData = yield getRentData();
+        let rentDataOrigin = yield getRentData(action.payload);
+        let rentData = rentDataOrigin.dulieu
+        let countSellData = rentDataOrigin.sotin
         yield put({
             type: 'GET_RENTDATA_SUCCESS',
-            payload: { rentData }
+            payload: { rentData, countSellData }
         })
     } catch{
         yield put({
@@ -15,6 +17,7 @@ function* rentSagaFunction(action) {
         })
     }
 }
+    
 
 
 export const rentSaga = [

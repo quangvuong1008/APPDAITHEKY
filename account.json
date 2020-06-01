@@ -221,6 +221,16 @@
       "DiaChi": "1",
       "TinhThanh": "1",
       "id": 23
+    },
+    {
+      "username": "admin123",
+      "password": "123",
+      "email": "123@123",
+      "HoVaTen": "Luu Quang Vuong",
+      "DienThoai": "091028182",
+      "DiaChi": "Thanh Nhan",
+      "TinhThanh": "ha Noi",
+      "id": 24
     }
   ]
 }
