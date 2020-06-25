@@ -37,8 +37,9 @@ class UserScreen extends React.Component {
         <View style={styles.container}>
           <View style={styles.top}></View>
           <View style={styles.body}>
-            <TouchableOpacity style={styles.avatar}>
-            </TouchableOpacity>
+            <Image style={styles.avatar}
+              source={{ uri: 'https://daitheky.r.worldssl.net/upload/images/avatar/no_avatar_nam.jpg' }}
+            />
             <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 8 }}>
               <Text style={styles.userName}>{this.state.data.HoVaTen}</Text>
             </View>
@@ -113,6 +114,6 @@ let styles = StyleSheet.create({
     color: 'black',
     fontSize: 24,
     fontWeight: 'bold'
-  }
+  },
 })
 export default UserScreen;

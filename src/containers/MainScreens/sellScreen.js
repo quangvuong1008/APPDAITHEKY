@@ -17,7 +17,6 @@ import { TextInput } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { getSellData } from '../../actions/sellScreenAction'
 import { connect } from 'react-redux'
-import BottomView from '../bottomView'
 import RNPickerSelect from 'react-native-picker-select'
 import Loading from '../../component/Loading';
 let width = Dimensions.get('window').width;
@@ -89,9 +88,12 @@ class SellScreen extends React.Component {
                             location: dataOrigin.DongXe,
                             price: dataOrigin.GiaTien,
                             acreage: dataOrigin.NgoaiThat,
-                            timeStamp: dataOrigin.NgayDang,
+                            timeStamp: dataOrigin.uptin,
                             description: dataOrigin.ThongTinMota,
                             images: imgs,
+                            LuotXem: dataOrigin.LuotXem,
+                            GiaTien: dataOrigin.GiaTien,
+                            NgoaiThat: dataOrigin.NgoaiThat,
                             type: type,
                             houseDirection: dataOrigin.NoiThat,
                             rooms: dataOrigin.HeThongNapNhienLieu,
@@ -111,6 +113,9 @@ class SellScreen extends React.Component {
                             timeStamp: dataOrigin.NgayDang,
                             description: dataOrigin.ThongTinMota,
                             images: imgs,
+                            LuotXem: dataOrigin.LuotXem,
+                            GiaTien: dataOrigin.GiaTien,
+                            NgoaiThat: dataOrigin.NgoaiThat,
                             type: type,
                             houseDirection: dataOrigin.NoiThat,
                             rooms: dataOrigin.HeThongNapNhienLieu,
@@ -154,7 +159,9 @@ class SellScreen extends React.Component {
                         />
                     </View>
                     <View style={{ flexDirection: 'row', marginBottom: 7 }}>
-                        <Text style={{ marginTop: 10, fontSize: 15, color: 'green', fontWeight: '800', marginLeft: 4, fontStyle: ('normal', 'italic') }}>Page {this.state.pageIndex} of {parseInt(this.props.countSellData / 15)}                 </Text>
+                        <Text style={{ marginTop: 10, fontSize: 15, color: 'green', fontWeight: '800', marginLeft: 4, fontStyle: ('normal', 'italic') }}>
+                            Page {this.state.pageIndex} of {parseInt(this.props.countSellData / 15)}
+                        </Text>
 
                         <RNPickerSelect
                             style={{ ...pickerSelectStyles }}
@@ -211,7 +218,7 @@ const pickerSelectStyles = StyleSheet.create({
         backgroundColor: 'green',
         color: 'white',
         borderRadius: 11,
-        width: 100,
+        width: 150,
         height: 25,
         justifyContent: 'center',
         paddingLeft: 10,
@@ -308,6 +315,7 @@ let styles = StyleSheet.create({
         marginLeft: -15,
         borderRadius: 15,
         marginTop: 8,
+        paddingVertical: 3,
     },
     searchIcon: {
         width: '100%',

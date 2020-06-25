@@ -1,5 +1,4 @@
 import React from 'react';
-import BottomView from '../bottomView';
 import { Table, TableWrapper, Row, Rows, Col } from 'react-native-table-component';
 import {
     SafeAreaView,
@@ -11,8 +10,10 @@ import {
     Image,
     StatusBar,
     Dimensions,
-    Button
+    Button,
+    TouchableOpacity
 } from 'react-native';
+import BottomView from '../../component/bottomView';
 let width = Dimensions.get('window').width;
 let height = Dimensions.get('window').height;
 class InitDataSellSrceen extends React.Component {
@@ -23,8 +24,9 @@ class InitDataSellSrceen extends React.Component {
         }
     }
     render() {
-        const link = 'https://daitheky.r.worldssl.net';
-        const { params } = this.props.navigation.state
+        const link = 'https://cdn1.daitheky.net';
+        const { params } = this.props.navigation.state;
+        var luotxem = parseInt(params.data.LuotXem, 10);
         const images = params.data.images
         const tableTypeTitle = ['Loại tin rao', 'Hướng nhà', 'Hướng ban công', 'Số phòng', 'Đường vào', 'Mặt tiền', 'Số tầng', 'Số toilet']
         const tableTypeData = [params.data.type, params.data.houseDirection, params.data.balconyDirection, params.data.rooms, params.data.wayIn, params.data.streetFace, params.data.floors, params.data.toilets]
@@ -33,14 +35,15 @@ class InitDataSellSrceen extends React.Component {
         return (
             <ScrollView style={styles.container}>
                 <Text style={styles.title}>{params.data.title}</Text>
-                <Text style={styles.location}>Địa điểm:     {params.data.location}</Text>
+                <Text style={styles.location}>Địa điểm: {params.data.location}</Text>
                 <View style={{ flexDirection: 'row', marginTop: 7, marginLeft: 6 }}>
-                    <Text style={{ color: 'gray' }}>Giá:{params.data.price}</Text>
-                    <Text style={{ marginLeft: width - width / 1.4, color: 'gray' }}>Ngày đăng tin:{params.data.timeStamp}</Text>
+                    <Text style={{ color: 'gray' }}>Giá: {params.data.price} tỷ</Text>
+                    <Text style={{ marginLeft: width - width / 1.4, color: 'gray' }}>Ngày đăng tin: {params.data.timeStamp}</Text>
                 </View>
-                <View style={{ flexDirection: 'row', marginLeft: 6, marginTop: 5 }}></View>
-                <Text style={{ marginLeft: 6, color: 'gray' }}>Diện tích:{params.data.acreage}</Text>
-
+                <View style={{ flexDirection: 'row', marginLeft: 0, marginTop: 0 }}>
+                    <Text style={{ marginLeft: 6, color: 'gray' }}>Diện tích: {params.data.acreage} m2</Text>
+                    <Text style={{ marginLeft: width - width / 1.4, color: 'gray' }}>Lượt xem: {luotxem + 1}</Text>
+                </View>
                 <View
                     style={{
                         marginTop: 20,
@@ -73,7 +76,7 @@ class InitDataSellSrceen extends React.Component {
                 </ScrollView>
                 <View style={styles.circleDiv}>
                     {images.filter(function (img) {
-                        if (img == "" || img == null|| img == undefined) {
+                        if (img == "" || img == null || img == undefined) {
                             return false;
                         }
                         return true;
@@ -104,12 +107,24 @@ class InitDataSellSrceen extends React.Component {
                     <Table borderStyle={{ borderWidth: 1 }}>
 
                         <TableWrapper style={styles.wrapperTable}>
-                            <Col data={tableInfoTitle} style={styles.titleTable} heightArr={[28,28]} textStyle={styles.textTable1} />
+                            <Col data={tableInfoTitle} style={styles.titleTable} heightArr={[28, 28]} textStyle={styles.textTable1} />
                             <Col data={tableInfoData} style={styles.titleData} heightArr={[28, 28]} textStyle={styles.textTable2} />
                         </TableWrapper>
                     </Table>
                 </View>
-                    
+                <TouchableOpacity
+                    style={{ flexDirection: 'row', }}
+                    onPress={() =>  this.props.navigation.navigate('PrintScreen', {
+                        data: params.data
+                    })}
+                >
+                    <Image style={styles.image}
+                        source={{ uri: 'https://previews.123rf.com/images/alexwhite/alexwhite1201/alexwhite120100045/11872095-print-web-button.jpg' }}
+
+                    />
+                    <Text style={styles.image}>Print</Text>
+                </TouchableOpacity>
+
                 <BottomView />
             </ScrollView >
         );
@@ -193,10 +208,15 @@ let styles = StyleSheet.create({
     },
     textTable2: {
         marginLeft: 4,
-        textAlign:'left',
-        fontSize:12
-    }
-
+        textAlign: 'left',
+        fontSize: 12
+    },
+    image: {
+        height: height / 6 * 0.3,
+        width: height / 6 * 0.3,
+        borderRadius: 8,
+        marginLeft: 5,
+    },
 
 })
 export default InitDataSellSrceen;

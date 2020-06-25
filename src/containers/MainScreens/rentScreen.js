@@ -17,8 +17,8 @@ import { TextInput } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { getRentData } from '../../actions/sellScreenAction'
 import { connect } from 'react-redux'
-import BottomView from '../bottomView'
 import RNPickerSelect from 'react-native-picker-select'
+import Loading from '../../component/Loading';
 let width = Dimensions.get('window').width;
 let height = Dimensions.get('window').height;
 class RentScreen extends React.Component {
@@ -27,7 +27,7 @@ class RentScreen extends React.Component {
         this.state = {
             data: [],
             filter: undefined,
-            pageIndex: 1,
+            pageIndex: 3,
         }
     }
     componentDidMount() {
@@ -55,147 +55,160 @@ class RentScreen extends React.Component {
 
     }
     render() {
-    
-        let dataRender
-        let count = 0
-        if (this.props.rentData) {
-            dataRender = this.props.rentData.map((data, index) => {
-                let dataOrigin = this.props.rentData[index];
-                var imgs = dataOrigin.AlbumMedium.split('|.');
-                var type;
-                switch (dataOrigin.HangXe) {
-                    case '452':
-                        type = "Chung cư"
-                        break;
-                    case '546':
-                        type = "Nhà riêng"
-                        break;
-                    case '549':
-                        type = "Văn phòng"
-                        break;
-                    case '547':
-                        type = "Nhà mặt phố"
-                        break;
-                }
-                console.log("Page " + this.state.pageIndex + ", " + "num " + index + ": " + dataOrigin.contact)
-
-                var data
-                if (dataOrigin.contact == null || dataOrigin.contact == "") {
-                    var data = {
-                        id: dataOrigin.IDMaTin,
-                        title: dataOrigin.TieuDe,
-                        location: dataOrigin.DongXe,
-                        price: dataOrigin.GiaTien,
-                        acreage: dataOrigin.NgoaiThat,
-                        timeStamp: dataOrigin.NgayDang,
-                        description: dataOrigin.ThongTinMota,
-                        images: imgs,
-                        type: type,
-                        houseDirection: dataOrigin.NoiThat,
-                        rooms: dataOrigin.HeThongNapNhienLieu,
-                        wayIn: dataOrigin.DanDong,
-                        streetFace: dataOrigin.HopSo,
-                        floors: dataOrigin.NhienLieu,
-                        toilets: dataOrigin.MucTieuThu,
+        if (this.props.rentData && this.props.countRentData) {
+            let dataRender
+            let count = 0
+            if (this.props.rentData) {
+                dataRender = this.props.rentData.map((data, index) => {
+                    let dataOrigin = this.props.rentData[index];
+                    var imgs = dataOrigin.AlbumMedium.split('|.');
+                    var type;
+                    switch (dataOrigin.HangXe) {
+                        case '452':
+                            type = "Chung cư"
+                            break;
+                        case '546':
+                            type = "Nhà riêng"
+                            break;
+                        case '549':
+                            type = "Văn phòng"
+                            break;
+                        case '547':
+                            type = "Nhà mặt phố"
+                            break;
                     }
-                } else {
-                    var contactToJSON = JSON.parse(dataOrigin.contact)
-                    var data = {
-                        id: dataOrigin.IDMaTin,
-                        title: dataOrigin.TieuDe,
-                        location: dataOrigin.DongXe,
-                        price: dataOrigin.GiaTien,
-                        acreage: dataOrigin.NgoaiThat,
-                        timeStamp: dataOrigin.NgayDang,
-                        description: dataOrigin.ThongTinMota,
-                        images: imgs,
-                        type: type,
-                        houseDirection: dataOrigin.NoiThat,
-                        rooms: dataOrigin.HeThongNapNhienLieu,
-                        wayIn: dataOrigin.DanDong,
-                        streetFace: dataOrigin.HopSo,
-                        floors: dataOrigin.NhienLieu,
-                        toilets: dataOrigin.MucTieuThu,
-                        sender: contactToJSON.HoVaTen,
-                        senderAddress: contactToJSON.DiaChi,
-                        senderProvince: "",
-                        senderPhone: contactToJSON.DienThoai,
-                        senderEmail: contactToJSON.Email,
+                    console.log("Page " + this.state.pageIndex + ", " + "num " + index + ": " + dataOrigin.contact)
+
+                    var data
+                    if (dataOrigin.contact == null || dataOrigin.contact == "") {
+                        var data = {
+                            id: dataOrigin.IDMaTin,
+                            title: dataOrigin.TieuDe,
+                            location: dataOrigin.DongXe,
+                            price: dataOrigin.GiaTien,
+                            acreage: dataOrigin.NgoaiThat,
+                            timeStamp: dataOrigin.NgayDang,
+                            description: dataOrigin.ThongTinMota,
+                            images: imgs,
+                            LuotXem: dataOrigin.LuotXem,
+                            GiaTien: dataOrigin.GiaTien,
+                            NgoaiThat: dataOrigin.NgoaiThat,
+                            type: type,
+                            houseDirection: dataOrigin.NoiThat,
+                            rooms: dataOrigin.HeThongNapNhienLieu,
+                            wayIn: dataOrigin.DanDong,
+                            streetFace: dataOrigin.HopSo,
+                            floors: dataOrigin.NhienLieu,
+                            toilets: dataOrigin.MucTieuThu,
+                        }
+                    } else {
+                        var contactToJSON = JSON.parse(dataOrigin.contact)
+                        var data = {
+                            id: dataOrigin.IDMaTin,
+                            title: dataOrigin.TieuDe,
+                            location: dataOrigin.DongXe,
+                            price: dataOrigin.GiaTien,
+                            acreage: dataOrigin.NgoaiThat,
+                            timeStamp: dataOrigin.NgayDang,
+                            description: dataOrigin.ThongTinMota,
+                            images: imgs,
+                            type: type,
+                            LuotXem: dataOrigin.LuotXem,
+                            GiaTien: dataOrigin.GiaTien,
+                            NgoaiThat: dataOrigin.NgoaiThat,
+                            houseDirection: dataOrigin.NoiThat,
+                            rooms: dataOrigin.HeThongNapNhienLieu,
+                            wayIn: dataOrigin.DanDong,
+                            streetFace: dataOrigin.HopSo,
+                            floors: dataOrigin.NhienLieu,
+                            toilets: dataOrigin.MucTieuThu,
+                            sender: contactToJSON.HoVaTen,
+                            senderAddress: contactToJSON.DiaChi,
+                            senderProvince: "",
+                            senderPhone: contactToJSON.DienThoai,
+                            senderEmail: contactToJSON.Email,
+                        }
                     }
-                }
 
 
-                count = count + 1;
-                return (
-                    <FormatDataSellScreen
-                        {...this.props}
-                        data={data}
-                    />
-                )
-            })
+                    count = count + 1;
+                    return (
+                        <FormatDataSellScreen
+                            {...this.props}
+                            data={data}
+                        />
+                    )
+                })
 
 
+            }
+
+            return (
+                <ScrollView style={styles.container}>
+                    <View style={{ flexDirection: 'row', }}>
+                        <Image style={styles.logoImage}
+                            source={require('AppDaiTheKy/image/logo.png')}
+                        />
+                        <TextInput
+                            style={styles.search}
+                            placeholder="Tìm kiếm"
+                            placeholderTextColor="gray"
+                            justifyContent='center'
+                            
+
+                        />
+                    </View>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Text style={{ marginTop: 10, fontSize: 15, color: 'green', fontWeight: '800', marginLeft: 4, fontStyle: ('normal', 'italic') }}>
+                            Page {this.state.pageIndex - 2} of {parseInt(this.props.countRentData / 15)}
+                        </Text>
+                        <RNPickerSelect
+                            style={{ ...pickerSelectStyles }}
+                            placeholder={{
+                                label: 'Sắp xếp',
+                                value: null,
+                                color: 'gray'
+                            }}
+
+                            onValueChange={(value) => {
+                                this.setState({
+                                    filter: value,
+                                });
+
+                            }}
+                            items={[
+                                { label: 'Thông thường', value: 'normal', color: 'green' },
+                                { label: 'Ngày đăng', value: 'date', color: 'green' },
+                                { label: 'Giá tăng', value: 'priceUp', color: 'green' },
+                                { label: 'Giá giảm', value: 'priceDown', color: 'green' },
+                                { label: 'Diện tích tăng', value: 'acreageUp', color: 'green' },
+                                { label: 'Diện tích giảm', value: 'acreageDown', color: 'green' },
+                            ]}
+                        />
+                    </View>
+                    {dataRender}
+                    <View style={styles.pagination}>
+                        <TouchableOpacity >
+                            <Icon name="chevron-left" size={20} color="black"
+                                style={styles.pgnButtonPrev}
+                                onPress={() => this.prevButton()}
+                            />
+                        </TouchableOpacity>
+                        <TouchableOpacity >
+                            <Icon name="chevron-right" size={20} color="black"
+                                style={styles.pgnButtonNext}
+                                onPress={() => this.nextButton()}
+                            />
+                        </TouchableOpacity>
+                    </View>
+
+                </ScrollView>
+            );
+        } else {
+            return (
+                <Loading></Loading>
+            )
         }
-
-        return (
-            <ScrollView style={styles.container}>
-                <View style={{ flexDirection: 'row', }}>
-                    <Image style={styles.logoImage}
-                        source={require('AppDaiTheKy/image/logo.png')}
-                    />
-                    <TextInput
-                        style={styles.search}
-                        placeholder="Tìm kiếm"
-                        placeholderTextColor="gray"
-                        justifyContent='center'
-
-                    />
-                </View>
-                <View style={{ flexDirection: 'row' }}>
-                    <Text style={{ marginTop: 10, fontSize: 15, color: 'green', fontWeight: '800', marginLeft: 4, fontStyle: ('normal', 'italic') }}>Tìm thấy {count} kết quả.</Text>
-
-                    <RNPickerSelect
-                        style={{ ...pickerSelectStyles }}
-                        placeholder={{
-                            label: 'Sắp xếp',
-                            value: null,
-                            color: 'gray'
-                        }}
-
-                        onValueChange={(value) => {
-                            this.setState({
-                                filter: value,
-                            });
-
-                        }}
-                        items={[
-                            { label: 'Thông thường', value: 'normal', color: 'green' },
-                            { label: 'Ngày đăng', value: 'date', color: 'green' },
-                            { label: 'Giá tăng', value: 'priceUp', color: 'green' },
-                            { label: 'Giá giảm', value: 'priceDown', color: 'green' },
-                            { label: 'Diện tích tăng', value: 'acreageUp', color: 'green' },
-                            { label: 'Diện tích giảm', value: 'acreageDown', color: 'green' },
-                        ]}
-                    />
-                </View>
-                {dataRender}
-                <View style={styles.pagination}>
-                    <TouchableOpacity >
-                        <Icon name="chevron-left" size={20} color="black"
-                            style={styles.pgnButtonPrev}
-                            onPress={() => this.prevButton()}
-                        />
-                    </TouchableOpacity>
-                    <TouchableOpacity >
-                        <Icon name="chevron-right" size={20} color="black"
-                            style={styles.pgnButtonNext}
-                            onPress={() => this.nextButton()}
-                        />
-                    </TouchableOpacity>
-                </View>
-
-            </ScrollView>
-        );
     }
 }
 const pickerSelectStyles = StyleSheet.create({
@@ -204,7 +217,7 @@ const pickerSelectStyles = StyleSheet.create({
         backgroundColor: 'green',
         color: 'white',
         borderRadius: 11,
-        width: 100,
+        width: 150,
         height: 25,
         justifyContent: 'center',
         paddingLeft: 10,
@@ -301,6 +314,7 @@ let styles = StyleSheet.create({
         marginLeft: -15,
         borderRadius: 15,
         marginTop: 8,
+        paddingVertical: 3,
     },
     searchIcon: {
         width: '100%',

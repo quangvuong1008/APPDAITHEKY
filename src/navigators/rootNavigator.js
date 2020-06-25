@@ -4,6 +4,7 @@ import Login from '../containers/loginPage';
 import Register from '../containers/registerPage';
 import MainTabNavigator from './mainTabNavigator';
 import InitDataSellScreen from '../containers/MainScreens/initDataSellScreen'
+import PrintScreen from '../containers/MainScreens/printScreen';
 
 const Navigator = createStackNavigator({
   Login: {
@@ -36,7 +37,20 @@ const Navigator = createStackNavigator({
         fontWeight: 'bold',
       },
     },
-  }
+  },
+  PrintScreen: {
+    screen: PrintScreen,
+    navigationOptions: {
+      title: "PICTURE",
+      headerStyle: {
+        backgroundColor: 'green',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    },
+  },
 },
   {
     initialRouteName: 'Login'

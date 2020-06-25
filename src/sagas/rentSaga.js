@@ -5,10 +5,10 @@ function* rentSagaFunction(action) {
       
         let rentDataOrigin = yield getRentData(action.payload);
         let rentData = rentDataOrigin.dulieu
-        let countSellData = rentDataOrigin.sotin
+        let countRentData = rentDataOrigin.sotin
         yield put({
             type: 'GET_RENTDATA_SUCCESS',
-            payload: { rentData, countSellData }
+            payload: { rentData, countRentData }
         })
     } catch{
         yield put({

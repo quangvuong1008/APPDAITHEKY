@@ -16,7 +16,6 @@ import {
 import { link } from '../configs/ngrokConfig';
 import Loading from '../component/Loading';
 import MessageDialog from '../component/MessageDialog';
-
 let width = Dimensions.get('window').width;
 let height = Dimensions.get('window').height;
 export default class LoginPage extends Component {
@@ -55,6 +54,7 @@ export default class LoginPage extends Component {
             this.setState({ errorCode: 'Sai tên tài khoản hoặc mật khẩu' })
         } else {
             //dung
+            
             this.props.navigation.navigate('Main')
            await AsyncStorage.setItem('data',JSON.stringify(data))
         }

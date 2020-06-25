@@ -14,7 +14,7 @@ import {
 
 
 const itemWidth = Dimensions.get('window').width;
-const itemHeigh = Dimensions.get('window').height / 7;
+const itemHeigh = Dimensions.get('window').height / 6;
 
 function pressFunction() {
 
@@ -30,11 +30,11 @@ class FormatDataSellScreen extends Component {
         }
     }
     render() {
-        const link = 'https://daitheky.r.worldssl.net';
+        const link = 'https://cdn1.daitheky.net';
         return (
             <TouchableOpacity
                 style={styles.container}
-                onPress={() => this.props.navigation.navigate('ClickSellScreen', {
+                onPress={() =>  this.props.navigation.navigate('ClickSellScreen', {
                     data: this.props.data
                 })}
             >
@@ -47,7 +47,10 @@ class FormatDataSellScreen extends Component {
                         <Text style={{ fontWeight: 'bold', fontSize: 15 }}>{this.props.data.title}</Text>
                     </View>
                     <View style={styles.description}>
-                        <Text style={{ color: 'gray' }}  maxLength={0}>{this.props.data.location}</Text>
+                        <Text style={{ color: 'gray' }} maxLength={15}>{this.props.data.location}</Text>
+                    </View>
+                    <View style={styles.title}>
+                        <Text style={{ fontWeight: 'bold', fontSize: 15 }}>Lượt xem: {this.props.data.LuotXem}</Text>
                     </View>
                 </View>
             </TouchableOpacity>
@@ -62,7 +65,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         borderTopWidth: 0.3,
         borderTopColor: 'gray',
-        backgroundColor:'#ede6e6'
+        backgroundColor: '#ede6e6'
     },
     image: {
         height: itemHeigh * 0.8,
@@ -77,11 +80,12 @@ const styles = StyleSheet.create({
     },
     title: {
         flex: 1,
+        marginTop: 5,
 
     },
     description: {
         flex: 1,
-        marginTop: 15,
+        marginTop: 35,
     }
 })
 export default FormatDataSellScreen;

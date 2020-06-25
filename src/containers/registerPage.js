@@ -82,6 +82,7 @@ export default class RegisterPage extends Component {
                     <TextInput
                         style={[styles.textinput, { marginTop: '5%', }]}
                         placeholder="Email"
+                        keyboardType='email-address'
                         placeholderTextColor="gray"
                         onChangeText={(email) => this.setState({ email })}
                     />
@@ -94,6 +95,7 @@ export default class RegisterPage extends Component {
                     <TextInput
                         style={[styles.textinput, { marginTop: '5%', }]}
                         placeholder="Điện Thoại"
+                        keyboardType='phone-pad'
                         placeholderTextColor="gray"
                         onChangeText={(DienThoai) => this.setState({ DienThoai })}
                     />
@@ -141,6 +143,7 @@ export default class RegisterPage extends Component {
                 {
                     this.state.errorCode ? <MessageDialog
                         message={this.state.errorCode}
+                        textinput = 'SUCCESS'
                         close={
                             () => {
                                 this.setState({
